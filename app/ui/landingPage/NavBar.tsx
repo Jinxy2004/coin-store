@@ -1,7 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { Button } from "@/components/ui/button";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { isAuthenticated } = getKindeServerSession();
+  const isUserAuthenticated = await isAuthenticated();
+
   return (
     <>
       <div className="w-full h-20 bg-gray-500 sticky top-0">
@@ -18,12 +24,19 @@ const Navbar = () => {
                   <p>Coins</p>
                 </Link>
               </li>
-              <li>
-                <Link href="/signup">
-                  <p>Signup</p>
-                </Link>
-              </li>
             </ul>
+
+            {isUserAuthenticated ? (
+              <Button asChild>
+                <LogoutLink>Logout</LogoutLink>
+              </Button>
+            ) : (
+              <Button asChild>
+                <Link href="/login">
+                  <p>Sign in/Sign up</p>
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
