@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";

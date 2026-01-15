@@ -17,12 +17,9 @@ model coins {
   id Int @id @default(autoincrement())
   name String?
   year String?
-
-}
-
-model users {
-  id Int @id @default(autoincrement())
-  username String @unique
-  email String
-  password String
+  country String?
+  price Int
+  type String?
+  description String?
+  denomination String?
 }
