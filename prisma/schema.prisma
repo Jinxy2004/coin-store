@@ -19,3 +19,10 @@ model coins {
   year String?
 
 }
+
+model users {
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String
+  password String
+}

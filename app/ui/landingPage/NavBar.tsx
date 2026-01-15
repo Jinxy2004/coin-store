@@ -9,8 +9,18 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 dark:text-black text-gray">
               <li>
+                <Link href="/">
+                  <p>Home Page</p>
+                </Link>
+              </li>
+              <li>
                 <Link href="/coins">
                   <p>Coins</p>
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup">
+                  <p>Signup</p>
                 </Link>
               </li>
             </ul>
