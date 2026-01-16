@@ -16,7 +16,7 @@ datasource db {
 model coins {
   id Int @id @default(autoincrement())
   name String?
-  year String?
+  year Int?
   country String?
   price Int
   type String?

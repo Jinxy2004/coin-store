@@ -6,7 +6,7 @@ import Link from "next/link";
 type Coin = {
   id: number;
   name: string | null;
-  year: string | null;
+  year: number | null;
 };
 
 export default function CoinsList({ coins }: { coins: Coin[] }) {
@@ -14,8 +14,9 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
 
   return (
     <main style={{ padding: 20 }}>
-      <h1>Stuff</h1>
-
+      <div className="justify-center align-middle">
+        <p>Hi</p>
+      </div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {coins.map((coin) => (
           <li
