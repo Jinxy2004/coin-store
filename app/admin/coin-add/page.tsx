@@ -16,6 +16,38 @@ export default function CoinAdd() {
     setSuccess(false);
     // Extracts all the data from the form
     const formData = new FormData(e.currentTarget);
+    // Handles the file upload
+    const file = formData.get("file") as File;
+    let imageUrl = null;
+
+    if (file && file.size > 0) {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(7)}.${fileExt}`;
+
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", file);
+      uploadFormData.append("fileName", fileName);
+
+      try {
+        const uploadResponse = await fetch("/api/upload", {
+          method: "POST",
+          body: uploadFormData,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error("Failed to upload image");
+        }
+
+        const { url } = await uploadResponse.json();
+        imageUrl = url;
+      } catch (err) {
+        setError("Failed to upload image");
+        setLoading(false);
+        return;
+      }
+    }
 
     // Sends a POST request to the api for form submission
     try {
@@ -32,6 +64,7 @@ export default function CoinAdd() {
           type: formData.get("type"),
           description: formData.get("description"),
           denomination: formData.get("denomination"),
+          imageUrl,
         }),
       });
 
@@ -168,6 +201,21 @@ export default function CoinAdd() {
             type="text"
             id="denomination"
             name="denomination"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="file"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            File
+          </label>
+          <input
+            type="file"
+            id="file"
+            name="file"
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
         </div>

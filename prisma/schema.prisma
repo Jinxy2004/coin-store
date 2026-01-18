@@ -22,4 +22,5 @@ model coins {
   type String?
   description String?
   denomination String?
+  imageUrl String?
 }

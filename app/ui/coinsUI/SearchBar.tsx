@@ -34,7 +34,7 @@ export default function SearchBar() {
   );
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-end">
       <input
         placeholder="Type (gold, silver)"
         value={type}
@@ -42,6 +42,8 @@ export default function SearchBar() {
           setType(e.target.value); // instant UI update
           updateParams({ type: e.target.value }); // debounced URL update
         }}
+        className="px-3 py-2 border rounded-md text-sm 
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       <input
@@ -51,6 +53,8 @@ export default function SearchBar() {
           setYearMin(e.target.value);
           updateParams({ yearMin: e.target.value });
         }}
+        className="px-3 py-2 border rounded-md text-sm 
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       <input
@@ -60,6 +64,8 @@ export default function SearchBar() {
           setYearMax(e.target.value);
           updateParams({ yearMax: e.target.value });
         }}
+        className="px-3 py-2 border rounded-md text-sm 
+               focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
     </div>
   );

@@ -14,9 +14,7 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
 
   return (
     <main style={{ padding: 20 }}>
-      <div className="justify-center align-middle">
-        <p>Hi</p>
-      </div>
+      <div className="justify-center align-middle"></div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {coins.map((coin) => (
           <li

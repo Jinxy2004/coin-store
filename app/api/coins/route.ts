@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         type: data.type || null,
         description: data.description || null,
         denomination: data.denomination || null,
+        imageUrl: data.imageUrl || null,
       },
     });
 
