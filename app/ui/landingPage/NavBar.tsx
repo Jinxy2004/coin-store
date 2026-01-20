@@ -28,6 +28,11 @@ const Navbar = async () => {
                   <p>Silver</p>
                 </Link>
               </li>
+              <li>
+                <Link href="/coins?type=gold">
+                  <p>Gold</p>
+                </Link>
+              </li>
             </ul>
 
             {isUserAuthenticated ? (
