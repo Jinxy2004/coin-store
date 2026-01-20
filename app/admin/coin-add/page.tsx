@@ -167,12 +167,21 @@ export default function CoinAdd() {
           >
             Type
           </label>
-          <input
-            type="text"
+          <select
             id="type"
             name="type"
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select a type
+            </option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+            <option value="historical_hold">Historical Gold</option>
+            <option value="historical_silver">Historical Silver</option>
+            <option value="historical">Historical (i.e. world history)</option>
+          </select>
         </div>
 
         <div>
