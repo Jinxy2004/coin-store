@@ -178,7 +178,7 @@ export default function CoinAdd() {
             </option>
             <option value="silver">Silver</option>
             <option value="gold">Gold</option>
-            <option value="historical_hold">Historical Gold</option>
+            <option value="historical_gold">Historical Gold</option>
             <option value="historical_silver">Historical Silver</option>
             <option value="historical">Historical (i.e. world history)</option>
           </select>

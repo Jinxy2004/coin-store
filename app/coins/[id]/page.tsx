@@ -19,12 +19,30 @@ export default async function coin({
     year,
     country,
     price,
-    type,
     description,
     denomination,
     imageUrl,
   } = coin;
-
+  let { type } = coin;
+  switch (type) {
+    case "gold":
+      type = "G" + type.slice(1);
+      break;
+    case "silver":
+      type = "S" + type.slice(1);
+      break;
+    case "historical_gold":
+      type = "Historical Gold";
+      break;
+    case "historical_silver":
+      type = "Historical Silver";
+      break;
+    case "historical":
+      type = "Historical";
+      break;
+    default:
+      break;
+  }
   return (
     <main className="max-w-4xl mx-auto p-8">
       <div className="bg-white rounded-lg shadow-lg p-6">
