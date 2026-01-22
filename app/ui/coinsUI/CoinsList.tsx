@@ -2,11 +2,13 @@
 import clsx from "clsx";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Coin = {
   id: number;
   name: string | null;
   year: number | null;
+  imageUrl: string | null;
 };
 
 export default function CoinsList({ coins }: { coins: Coin[] }) {
@@ -25,14 +27,28 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
             <Link
               href={`../../coins/${coin.id}`}
               className={clsx(
-                "block p-3 rounded-md transition",
+                "block p-3 rounded-md transition h-100 flex flex-col",
                 activeId === coin.id
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
+                  : "bg-gray-100 hover:bg-gray-200",
               )}
             >
-              <strong>{coin.name}</strong>
-              <p>{coin.year}</p>
+              {coin.imageUrl && (
+                <div className="mb-4 border-4 border-gray-300 rounded-md overflow-hidden bg-white p-4 h-70 flex items-center justify-center">
+                  <Image
+                    src={coin.imageUrl}
+                    alt={coin.name || "Coin image"}
+                    width={200}
+                    height={200}
+                    className="object-contain w-full h-full"
+                    priority
+                  />
+                </div>
+              )}
+              <div className="text-center flex-1 flex flex-col justify-center">
+                <strong>{coin.name}</strong>
+                <p>{coin.year}</p>
+              </div>
             </Link>
           </li>
         ))}
