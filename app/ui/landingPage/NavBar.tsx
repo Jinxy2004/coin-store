@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import NavButton from "@/components/ui/NavButton";
 
 const Navbar = async () => {
   const { isAuthenticated } = getKindeServerSession();
@@ -9,40 +10,38 @@ const Navbar = async () => {
 
   return (
     <>
-      <div className="w-full h-20 bg-gray-500 sticky top-0">
+      <div className="w-full h-20 bg-slate-900 from-slate-900 via-slate-800 to-slate-900 sticky top-0 z-50 border-b border-slate-700 shadow-lg backdrop-blur-md">
         <div className="container mx-auto px-4 h-full">
-          <div className="flex justify-between items-center h-full">
-            <ul className="hidden md:flex gap-x-6 dark:text-black text-gray">
+          <div className="grid grid-cols-3 items-center h-full">
+            <ul className="col-start-2 justify-self-center hidden md:flex gap-x-8 text-slate-200 font-medium">
               <li>
-                <Link href="/">
-                  <p>Home Page</p>
-                </Link>
+                <NavButton href="/">Home Page</NavButton>
               </li>
               <li>
-                <Link href="/coins">
-                  <p>Coins</p>
-                </Link>
+                <NavButton href="/coins">Coins</NavButton>
               </li>
               <li>
-                <Link href="/coins?type=silver">
-                  <p>Silver</p>
-                </Link>
+                <NavButton href="/coins?type=silver">Silver</NavButton>
               </li>
               <li>
-                <Link href="/coins?type=gold">
-                  <p>Gold</p>
-                </Link>
+                <NavButton href="/coins?type=gold">Gold</NavButton>
               </li>
             </ul>
 
             {isUserAuthenticated ? (
-              <Button asChild>
+              <Button
+                asChild
+                className="justify-self-end bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+              >
                 <LogoutLink>Logout</LogoutLink>
               </Button>
             ) : (
-              <Button asChild>
+              <Button
+                asChild
+                className="justify-self-end bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+              >
                 <Link href="/login">
-                  <p>Sign in/Sign up</p>
+                  <p>Sign in / Sign up</p>
                 </Link>
               </Button>
             )}

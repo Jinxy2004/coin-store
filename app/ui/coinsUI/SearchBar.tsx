@@ -28,9 +28,9 @@ export default function SearchBar() {
         else params.delete(key);
       });
 
-      router.push(`/coins?${params.toString()}`);
+      router.push(`/coins?${params.toString().toLowerCase()}`);
     },
-    300
+    300,
   );
 
   return (
