@@ -38,7 +38,7 @@ const Navbar = async () => {
             ) : (
               <Button
                 asChild
-                className="justify-self-end bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+                className="justify-self-end bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all"
               >
                 <Link href="/login">
                   <p>Sign in / Sign up</p>

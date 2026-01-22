@@ -72,7 +72,8 @@ export default async function coin({
             </div>
           )}
           <div>
-            <span className="font-semibold">Price:</span> ${price}
+            <span className="font-semibold">Price:</span> $
+            {(price / 100).toFixed(2)}
           </div>
           {type && (
             <div>
