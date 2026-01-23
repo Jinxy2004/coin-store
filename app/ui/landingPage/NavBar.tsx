@@ -10,10 +10,10 @@ const Navbar = async () => {
 
   return (
     <>
-      <div className="w-full h-20 bg-slate-900 from-slate-900 via-slate-800 to-slate-900 sticky top-0 z-50 border-b border-slate-700 shadow-lg backdrop-blur-md">
+      <div className="w-full h-20 bg-white sticky top-0 z-50 border-b border-slate-200 shadow-md backdrop-blur-md">
         <div className="container mx-auto px-4 h-full">
           <div className="grid grid-cols-3 items-center h-full">
-            <ul className="col-start-2 justify-self-center hidden md:flex gap-x-8 text-slate-200 font-medium">
+            <ul className="col-start-2 justify-self-center hidden md:flex gap-x-8 text-slate-700 font-medium">
               <li>
                 <NavButton href="/">Home Page</NavButton>
               </li>
@@ -31,14 +31,14 @@ const Navbar = async () => {
             {isUserAuthenticated ? (
               <Button
                 asChild
-                className="justify-self-end bg-red-600 hover:bg-red-700 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+                className="justify-self-end bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm hover:shadow-md transition-all"
               >
                 <LogoutLink>Logout</LogoutLink>
               </Button>
             ) : (
               <Button
                 asChild
-                className="justify-self-end bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+                className="justify-self-end bg-amber-700 hover:bg-amber-800 text-white font-semibold shadow-sm hover:shadow-md transition-all"
               >
                 <Link href="/login">
                   <p>Sign in / Sign up</p>

@@ -27,7 +27,7 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
             <Link
               href={`../../coins/${coin.id}`}
               className={clsx(
-                "block p-3 rounded-md transition h-100 flex flex-col",
+                "p-3 rounded-md transition h-100 flex flex-col",
                 activeId === coin.id
                   ? "bg-blue-500 text-white"
                   : "bg-gray-100 hover:bg-gray-200",
