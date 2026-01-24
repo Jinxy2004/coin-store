@@ -7,7 +7,7 @@ export default async function Home() {
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-amber-800 mb-6">
-            Premium Coin Collection
+            Grandpa's Coin Store
           </h1>
           <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed">
             Discover rare and valuable coins from around the world. Build your

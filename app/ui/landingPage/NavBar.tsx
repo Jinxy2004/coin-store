@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import NavButton from "@/components/ui/NavButton";
@@ -40,9 +40,7 @@ const Navbar = async () => {
                 asChild
                 className="justify-self-end bg-amber-700 hover:bg-amber-800 text-white font-semibold shadow-sm hover:shadow-md transition-all"
               >
-                <Link href="/login">
-                  <p>Sign in / Sign up</p>
-                </Link>
+                <LoginLink>Sign in / Sign up</LoginLink>
               </Button>
             )}
           </div>
