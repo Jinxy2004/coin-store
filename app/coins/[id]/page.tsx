@@ -2,12 +2,17 @@
 import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import AddToCartButton from "@/app/ui/cart/AddToCartButton";
 
 export default async function coin({
   params,
 }: {
   params: Promise<{ id: number }>;
 }) {
+  const { isAuthenticated } = getKindeServerSession();
+  const isUserAuthenticated = await isAuthenticated();
+
   const coin = await prisma.coins.findUnique({
     where: { id: Number((await params).id) },
   });
@@ -39,6 +44,7 @@ export default async function coin({
     description,
     denomination,
     imageUrl,
+    stock,
   } = coin;
   let { type } = coin;
   switch (type) {
@@ -147,6 +153,27 @@ export default async function coin({
                 <p className="text-4xl font-bold text-amber-800 mt-2">
                   ${(price / 100).toFixed(2)}
                 </p>
+
+                {/* Stock Status */}
+                <div className="mt-3 mb-2">
+                  {stock > 0 ? (
+                    <span
+                      className={`text-sm font-medium ${stock <= 5 ? "text-amber-600" : "text-green-600"}`}
+                    >
+                      {stock <= 5 ? `Only ${stock} left!` : `${stock} in stock`}
+                    </span>
+                  ) : (
+                    <span className="text-sm font-medium text-red-600">
+                      Out of Stock
+                    </span>
+                  )}
+                </div>
+
+                <AddToCartButton
+                  coinId={id}
+                  isAuthenticated={isUserAuthenticated ?? false}
+                  stock={stock}
+                />
               </div>
             </div>
           </div>

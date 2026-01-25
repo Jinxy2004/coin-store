@@ -3,6 +3,7 @@ import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import NavButton from "@/components/ui/NavButton";
+import CartIcon from "@/app/ui/cart/CartIcon";
 
 const Navbar = async () => {
   const { isAuthenticated } = getKindeServerSession();
@@ -29,12 +30,15 @@ const Navbar = async () => {
             </ul>
 
             {isUserAuthenticated ? (
-              <Button
-                asChild
-                className="justify-self-end bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm hover:shadow-md transition-all"
-              >
-                <LogoutLink>Logout</LogoutLink>
-              </Button>
+              <div className="flex items-center gap-4 justify-self-end">
+                <CartIcon isAuthenticated={isUserAuthenticated} />
+                <Button
+                  asChild
+                  className="bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm hover:shadow-md transition-all"
+                >
+                  <LogoutLink>Logout</LogoutLink>
+                </Button>
+              </div>
             ) : (
               <Button
                 asChild

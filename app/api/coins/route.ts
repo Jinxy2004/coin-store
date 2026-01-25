@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     if (!data.name || !data.country || data.price === undefined) {
       return NextResponse.json(
         { error: "Missing required fields: name, country, price" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
         description: data.description || null,
         denomination: data.denomination || null,
         imageUrl: data.imageUrl || null,
+        stock: data.stock || 0,
       },
     });
 
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
     console.error("Error creating coin:", error);
     return NextResponse.json(
       { error: "Failed to create coin" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
