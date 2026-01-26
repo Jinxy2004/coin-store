@@ -1,7 +1,30 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { prisma } from "@/lib/prisma";
+import FeaturedCoinsCarousel from "./ui/landingPage/FeaturedCoinsCarousel";
+
+async function getHighValueCoins() {
+  const coins = await prisma.coins.findMany({
+    orderBy: {
+      price: "desc",
+    },
+    take: 12,
+    select: {
+      id: true,
+      name: true,
+      year: true,
+      imageUrl: true,
+      price: true,
+      type: true,
+      country: true,
+    },
+  });
+  return coins;
+}
 
 export default async function Home() {
+  const featuredCoins = await getHighValueCoins();
+
   return (
     <main className="min-h-screen bg-slate-50">
       <section className="container mx-auto px-4 pt-20 pb-16">
@@ -32,6 +55,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <FeaturedCoinsCarousel coins={featuredCoins} />
 
       <section className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
