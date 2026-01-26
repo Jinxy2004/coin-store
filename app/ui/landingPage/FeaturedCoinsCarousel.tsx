@@ -13,6 +13,13 @@ type Coin = {
   country: string | null;
 };
 
+function formatCoinType(type: string): string {
+  return type
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
 export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollPositionRef = useRef(0);
@@ -55,7 +62,7 @@ export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-r from-amber-50 via-white to-amber-50 overflow-hidden">
+    <section className="py-16 bg-linear-to-r from-amber-50 via-white to-amber-50 overflow-hidden">
       <div className="container mx-auto px-4 mb-8">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-800 mb-2">
           Featured High-Value Coins
@@ -75,10 +82,10 @@ export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
           <Link
             href={`/coins/${coin.id}`}
             key={`${coin.id}-${index}`}
-            className="flex-shrink-0 w-72 group"
+            className="shrink-0 w-72 group"
           >
             <div className="bg-white rounded-xl border-2 border-amber-200 hover:border-amber-400 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 bg-gradient-to-br from-slate-100 to-amber-50 p-4 flex items-center justify-center">
+              <div className="relative h-48 bg-linear-to-br from-slate-100 to-amber-50 p-4 flex items-center justify-center">
                 {coin.imageUrl ? (
                   <Image
                     src={coin.imageUrl}
@@ -93,8 +100,8 @@ export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
                   </div>
                 )}
                 {coin.type && (
-                  <span className="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-full bg-amber-600 text-white uppercase">
-                    {coin.type}
+                  <span className="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-full bg-amber-600 text-white">
+                    {formatCoinType(coin.type)}
                   </span>
                 )}
               </div>

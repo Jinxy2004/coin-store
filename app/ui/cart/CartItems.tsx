@@ -156,7 +156,7 @@ export default function CartItems() {
             className="bg-white rounded-lg shadow-md border border-slate-200 p-4 flex gap-4"
           >
             {/* Coin Image */}
-            <div className="relative w-24 h-24 flex-shrink-0 bg-slate-100 rounded-lg overflow-hidden">
+            <div className="relative w-24 h-24 shrink-0 bg-slate-100 rounded-lg overflow-hidden">
               {item.coin.imageUrl ? (
                 <Image
                   src={item.coin.imageUrl}
@@ -184,7 +184,7 @@ export default function CartItems() {
             </div>
 
             {/* Coin Details */}
-            <div className="flex-grow">
+            <div className="grow">
               <Link
                 href={`/coins/${item.coinId}`}
                 className="text-lg font-semibold text-slate-800 hover:text-amber-700 transition-colors"
