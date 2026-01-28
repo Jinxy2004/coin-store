@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 
 export default function Filters() {
@@ -12,6 +12,10 @@ export default function Filters() {
   const [yearMin, setYearMin] = useState("");
   const [yearMax, setYearMax] = useState("");
   const [country, setCountry] = useState("");
+  const [countrySearch, setCountrySearch] = useState("");
+  const [availableCountries, setAvailableCountries] = useState<string[]>([]);
+  const [showCountryDropdown, setShowCountryDropdown] = useState(false);
+  const countryInputRef = useRef<HTMLInputElement>(null);
   const [expandedSections, setExpandedSections] = useState({
     type: true,
     year: true,
@@ -22,7 +26,39 @@ export default function Filters() {
     setType(searchParams.get("type") ?? "");
     setYearMin(searchParams.get("yearMin") ?? "");
     setYearMax(searchParams.get("yearMax") ?? "");
-    setCountry(searchParams.get("country") ?? "");
+    const countryParam = searchParams.get("country") ?? "";
+    setCountry(countryParam);
+    setCountrySearch(countryParam);
+  }, []);
+
+  // Fetch available countries
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch("/api/coins/countries");
+        if (response.ok) {
+          const countries = await response.json();
+          setAvailableCountries(countries);
+        }
+      } catch (error) {
+        console.error("Failed to fetch countries:", error);
+      }
+    };
+    fetchCountries();
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        countryInputRef.current &&
+        !countryInputRef.current.contains(event.target as Node)
+      ) {
+        setShowCountryDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const updateParams = useDebouncedCallback(
@@ -56,7 +92,20 @@ export default function Filters() {
     setYearMin("");
     setYearMax("");
     setCountry("");
+    setCountrySearch("");
     router.push("/coins");
+  };
+
+  // Filter countries based on search input
+  const filteredCountries = availableCountries.filter((c) =>
+    c.toLowerCase().includes(countrySearch.toLowerCase()),
+  );
+
+  const handleCountrySelect = (selectedCountry: string) => {
+    setCountry(selectedCountry);
+    setCountrySearch(selectedCountry);
+    setShowCountryDropdown(false);
+    updateParams({ country: selectedCountry });
   };
 
   const typeOptions = [
@@ -200,18 +249,45 @@ export default function Filters() {
           />
         </button>
         {expandedSections.country && (
-          <div>
+          <div className="relative" ref={countryInputRef}>
             <input
               type="text"
-              placeholder="Filter by country"
-              value={country}
+              placeholder="Search countries..."
+              value={countrySearch}
               onChange={(e) => {
-                setCountry(e.target.value);
-                updateParams({ country: e.target.value });
+                setCountrySearch(e.target.value);
+                setShowCountryDropdown(true);
+                if (!e.target.value) {
+                  setCountry("");
+                  updateParams({ country: "" });
+                }
               }}
+              onFocus={() => setShowCountryDropdown(true)}
               className="w-full px-3 py-2 border border-slate-300 rounded-md text-sm 
                  focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-transparent"
             />
+            {showCountryDropdown && filteredCountries.length > 0 && (
+              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                {filteredCountries.map((countryOption) => (
+                  <button
+                    key={countryOption}
+                    onClick={() => handleCountrySelect(countryOption)}
+                    className={`w-full text-left px-3 py-2 text-sm hover:bg-amber-50 transition-colors ${
+                      country === countryOption
+                        ? "bg-amber-100 text-amber-900 font-medium"
+                        : "text-slate-700"
+                    }`}
+                  >
+                    {countryOption}
+                  </button>
+                ))}
+              </div>
+            )}
+            {countrySearch && filteredCountries.length === 0 && (
+              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg p-3">
+                <p className="text-sm text-slate-500">No countries found</p>
+              </div>
+            )}
           </div>
         )}
       </div>
