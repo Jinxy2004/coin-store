@@ -59,44 +59,22 @@ export default function AddToCartButton({
   const isOutOfStock = stock <= 0;
 
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       <Button
         onClick={handleAddToCart}
         disabled={isLoading || isOutOfStock}
-        className={`w-full text-lg py-6 font-semibold transition-all ${
+        className={`w-full text-base py-5 font-semibold ${
           isOutOfStock
-            ? "bg-slate-400 hover:bg-slate-400 cursor-not-allowed"
+            ? "bg-[#999999] hover:bg-[#999999] cursor-not-allowed border-[#999999]"
             : added
-              ? "bg-green-600 hover:bg-green-700"
+              ? "bg-[#228b22] hover:bg-[#1a6b1a] border-[#1a6b1a]"
               : error
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-amber-700 hover:bg-amber-800"
+                ? "bg-[#cc3333] hover:bg-[#aa2222] border-[#aa2222]"
+                : ""
         } text-white`}
       >
         {isLoading ? (
-          <span className="flex items-center gap-2">
-            <svg
-              className="animate-spin h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-            Adding...
-          </span>
+          <span className="flex items-center gap-2">Adding...</span>
         ) : isOutOfStock ? (
           <span className="flex items-center gap-2">
             <svg
@@ -168,7 +146,7 @@ export default function AddToCartButton({
         )}
       </Button>
       {!isOutOfStock && stock <= 5 && (
-        <p className="text-amber-600 text-sm mt-2 text-center font-medium">
+        <p className="text-[#cc6600] text-sm mt-2 text-center font-medium">
           Only {stock} left in stock!
         </p>
       )}

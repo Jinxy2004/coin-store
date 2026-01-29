@@ -26,29 +26,25 @@ export default async function Home() {
   const featuredCoins = await getHighValueCoins();
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <section className="container mx-auto px-4 pt-20 pb-16">
+    <main className="min-h-screen bg-white">
+      <section className="container mx-auto px-4 pt-12 pb-10 border-b border-[#cccccc]">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-amber-800 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#2c5282] mb-4">
             Grandpa's Coin Store
           </h1>
-          <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-[#555555] mb-6">
             Discover rare and valuable coins from around the world. Build your
             collection with authentic pieces backed by our quality guarantee.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-amber-700 hover:bg-amber-800 text-white text-lg px-8 shadow-md"
-            >
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button asChild size="lg" className="text-base px-8">
               <Link href="/coins">Browse Collection</Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="text-lg px-8 border-2 border-amber-700 text-amber-800 hover:bg-amber-50"
+              className="text-base px-8 border-2 border-[#d4af37] text-[#8b6914] hover:bg-[#faf8f0]"
             >
               <Link href="/coins?type=gold">View Gold Coins</Link>
             </Button>
@@ -58,32 +54,32 @@ export default async function Home() {
 
       <FeaturedCoinsCarousel coins={featuredCoins} />
 
-      <section className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-white p-8 rounded-lg border border-slate-200 hover:border-amber-400 hover:shadow-lg transition-all">
-            <h3 className="text-xl font-semibold text-amber-800 mb-3">
+      <section className="container mx-auto px-4 py-10 bg-[#f5f5f5] border-y border-[#cccccc]">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="bg-white p-6 border border-[#cccccc] hover:border-[#d4af37]">
+            <h3 className="text-lg font-semibold text-[#2c5282] mb-2 border-b border-[#d4af37] pb-2">
               Authenticated Quality
             </h3>
-            <p className="text-slate-600">
+            <p className="text-[#555555] text-sm">
               Every coin is carefully verified for authenticity.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg border border-slate-200 hover:border-amber-400 hover:shadow-lg transition-all">
-            <h3 className="text-xl font-semibold text-amber-800 mb-3">
+          <div className="bg-white p-6 border border-[#cccccc] hover:border-[#d4af37]">
+            <h3 className="text-lg font-semibold text-[#2c5282] mb-2 border-b border-[#d4af37] pb-2">
               Rare Finds
             </h3>
-            <p className="text-slate-600">
+            <p className="text-[#555555] text-sm">
               Access exclusive collections of gold and silver coins with
               historical significance and investment value.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg border border-slate-200 hover:border-amber-400 hover:shadow-lg transition-all">
-            <h3 className="text-xl font-semibold text-amber-800 mb-3">
+          <div className="bg-white p-6 border border-[#cccccc] hover:border-[#d4af37]">
+            <h3 className="text-lg font-semibold text-[#2c5282] mb-2 border-b border-[#d4af37] pb-2">
               Secure Trading
             </h3>
-            <p className="text-slate-600">
+            <p className="text-[#555555] text-sm">
               Shop with confidence using our secure payment system and insured
               shipping for all orders.
             </p>
@@ -91,17 +87,17 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-800 mb-12">
+      <section className="container mx-auto px-4 py-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#2c5282] mb-8 border-b-2 border-[#d4af37] pb-2 max-w-md mx-auto">
           Explore by Category
         </h2>
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
           <Link href="/coins?type=gold" className="group">
-            <div className="bg-amber-50 p-10 rounded-lg border-2 border-amber-300 hover:border-amber-500 transition-all hover:shadow-lg">
-              <h3 className="text-2xl font-bold text-amber-800 mb-3 group-hover:text-amber-900 transition-colors">
+            <div className="bg-[#faf8f0] p-8 border-2 border-[#d4af37] hover:bg-[#f5f0e0]">
+              <h3 className="text-xl font-bold text-[#8b6914] mb-2">
                 Gold Coins
               </h3>
-              <p className="text-slate-700">
+              <p className="text-[#555555] text-sm">
                 Timeless investments and collector favorites crafted from
                 precious gold.
               </p>
@@ -109,11 +105,11 @@ export default async function Home() {
           </Link>
 
           <Link href="/coins?type=silver" className="group">
-            <div className="bg-slate-100 p-10 rounded-lg border-2 border-slate-300 hover:border-slate-400 transition-all hover:shadow-lg">
-              <h3 className="text-2xl font-bold text-slate-700 mb-3 group-hover:text-slate-800 transition-colors">
+            <div className="bg-[#f5f5f5] p-8 border-2 border-[#999999] hover:bg-[#e8e8e8]">
+              <h3 className="text-xl font-bold text-[#555555] mb-2">
                 Silver Coins
               </h3>
-              <p className="text-slate-700">
+              <p className="text-[#555555] text-sm">
                 Beautiful silver pieces perfect for both collectors and
                 investors.
               </p>
@@ -122,20 +118,16 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16 pb-24">
-        <div className="max-w-3xl mx-auto text-center bg-white p-12 rounded-lg border-2 border-amber-300 shadow-lg">
-          <h2 className="text-3xl font-bold text-amber-800 mb-4">
+      <section className="container mx-auto px-4 py-10 pb-16">
+        <div className="max-w-3xl mx-auto text-center bg-[#f5f5f5] p-8 border-2 border-[#cccccc]">
+          <h2 className="text-2xl font-bold text-[#2c5282] mb-3">
             Start Your Collection Today
           </h2>
-          <p className="text-slate-700 mb-8 text-lg">
+          <p className="text-[#555555] mb-6">
             Join thousands of collectors who trust us for their numismatic
             needs.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-amber-700 hover:bg-amber-800 text-white text-lg px-10 shadow-md"
-          >
+          <Button asChild size="lg" className="text-base px-10">
             <Link href="/coins">View All Coins</Link>
           </Button>
         </div>

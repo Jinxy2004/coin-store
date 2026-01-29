@@ -117,29 +117,27 @@ export default function Filters() {
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-slate-200 p-6 h-fit sticky top-24">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-slate-800">Filters</h2>
+    <div className="bg-white border border-[#cccccc] p-4 h-fit sticky top-20">
+      <div className="flex justify-between items-center mb-4 border-b border-[#d4af37] pb-2">
+        <h2 className="text-base font-semibold text-[#2c5282]">Filters</h2>
         <button
           onClick={clearFilters}
-          className="text-sm text-amber-700 hover:text-amber-800 font-medium transition-colors"
+          className="text-sm text-[#2c5282] hover:text-[#1e3a5f] font-medium"
         >
           Clear
         </button>
       </div>
 
       {/* Type Filter */}
-      <div className="mb-6">
+      <div className="mb-4">
         <button
           onClick={() => toggleSection("type")}
-          className="w-full flex items-center justify-between mb-3 hover:text-amber-700 transition-colors"
+          className="w-full flex items-center justify-between mb-2 hover:text-[#2c5282]"
         >
-          <h3 className="font-semibold text-slate-700">Type</h3>
+          <h3 className="font-semibold text-[#333333] text-sm">Type</h3>
           <ChevronDown
-            size={18}
-            className={`transition-transform ${
-              expandedSections.type ? "rotate-180" : ""
-            }`}
+            size={16}
+            className={`${expandedSections.type ? "rotate-180" : ""}`}
           />
         </button>
         {expandedSections.type && (
@@ -158,9 +156,9 @@ export default function Filters() {
                     setType(e.target.value);
                     updateParams({ type: e.target.value });
                   }}
-                  className="w-4 h-4 accent-amber-700"
+                  className="w-4 h-4 accent-[#2c5282]"
                 />
-                <span className="text-sm text-slate-600 capitalize">
+                <span className="text-sm text-[#555555] capitalize">
                   {option.replace("_", " ")}
                 </span>
               </label>
@@ -170,7 +168,7 @@ export default function Filters() {
                 setType("");
                 updateParams({ type: "" });
               }}
-              className="text-sm text-slate-500 hover:text-slate-700 mt-2"
+              className="text-sm text-[#666666] hover:text-[#333333] mt-2"
             >
               Clear type
             </button>
@@ -178,26 +176,24 @@ export default function Filters() {
         )}
       </div>
 
-      <div className="border-t border-slate-200 my-6"></div>
+      <div className="border-t border-[#cccccc] my-4"></div>
 
       {/* Year Filter */}
-      <div className="mb-6">
+      <div className="mb-4">
         <button
           onClick={() => toggleSection("year")}
-          className="w-full flex items-center justify-between mb-3 hover:text-amber-700 transition-colors"
+          className="w-full flex items-center justify-between mb-2 hover:text-[#2c5282]"
         >
-          <h3 className="font-semibold text-slate-700">Year</h3>
+          <h3 className="font-semibold text-[#333333] text-sm">Year</h3>
           <ChevronDown
-            size={18}
-            className={`transition-transform ${
-              expandedSections.year ? "rotate-180" : ""
-            }`}
+            size={16}
+            className={`${expandedSections.year ? "rotate-180" : ""}`}
           />
         </button>
         {expandedSections.year && (
-          <div className="space-y-3">
+          <div className="space-y-2">
             <div>
-              <label className="text-sm text-slate-600 block mb-1">
+              <label className="text-xs text-[#666666] block mb-1">
                 From Year
               </label>
               <input
@@ -208,12 +204,12 @@ export default function Filters() {
                   setYearMin(e.target.value);
                   updateParams({ yearMin: e.target.value });
                 }}
-                className="w-full px-3 py-2 border border-slate-300 rounded-md text-sm 
-                   focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-transparent"
+                className="w-full px-2 py-1.5 border border-[#cccccc] text-sm 
+                   focus:outline-none focus:border-[#2c5282]"
               />
             </div>
             <div>
-              <label className="text-sm text-slate-600 block mb-1">
+              <label className="text-xs text-[#666666] block mb-1">
                 To Year
               </label>
               <input
@@ -224,28 +220,26 @@ export default function Filters() {
                   setYearMax(e.target.value);
                   updateParams({ yearMax: e.target.value });
                 }}
-                className="w-full px-3 py-2 border border-slate-300 rounded-md text-sm 
-                   focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-transparent"
+                className="w-full px-2 py-1.5 border border-[#cccccc] text-sm 
+                   focus:outline-none focus:border-[#2c5282]"
               />
             </div>
           </div>
         )}
       </div>
 
-      <div className="border-t border-slate-200 my-6"></div>
+      <div className="border-t border-[#cccccc] my-4"></div>
 
       {/* Country Filter */}
       <div>
         <button
           onClick={() => toggleSection("country")}
-          className="w-full flex items-center justify-between mb-3 hover:text-amber-700 transition-colors"
+          className="w-full flex items-center justify-between mb-2 hover:text-[#2c5282]"
         >
-          <h3 className="font-semibold text-slate-700">Country</h3>
+          <h3 className="font-semibold text-[#333333] text-sm">Country</h3>
           <ChevronDown
-            size={18}
-            className={`transition-transform ${
-              expandedSections.country ? "rotate-180" : ""
-            }`}
+            size={16}
+            className={`${expandedSections.country ? "rotate-180" : ""}`}
           />
         </button>
         {expandedSections.country && (
@@ -263,19 +257,19 @@ export default function Filters() {
                 }
               }}
               onFocus={() => setShowCountryDropdown(true)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-md text-sm 
-                 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-transparent"
+              className="w-full px-2 py-1.5 border border-[#cccccc] text-sm 
+                 focus:outline-none focus:border-[#2c5282]"
             />
             {showCountryDropdown && filteredCountries.length > 0 && (
-              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+              <div className="absolute z-10 w-full mt-1 bg-white border border-[#cccccc] max-h-60 overflow-y-auto">
                 {filteredCountries.map((countryOption) => (
                   <button
                     key={countryOption}
                     onClick={() => handleCountrySelect(countryOption)}
-                    className={`w-full text-left px-3 py-2 text-sm hover:bg-amber-50 transition-colors ${
+                    className={`w-full text-left px-2 py-1.5 text-sm hover:bg-[#f5f5f5] ${
                       country === countryOption
-                        ? "bg-amber-100 text-amber-900 font-medium"
-                        : "text-slate-700"
+                        ? "bg-[#e8f0f8] text-[#2c5282] font-medium"
+                        : "text-[#555555]"
                     }`}
                   >
                     {countryOption}
@@ -284,8 +278,8 @@ export default function Filters() {
               </div>
             )}
             {countrySearch && filteredCountries.length === 0 && (
-              <div className="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg p-3">
-                <p className="text-sm text-slate-500">No countries found</p>
+              <div className="absolute z-10 w-full mt-1 bg-white border border-[#cccccc] p-2">
+                <p className="text-sm text-[#666666]">No countries found</p>
               </div>
             )}
           </div>

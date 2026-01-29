@@ -62,19 +62,19 @@ export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
   }
 
   return (
-    <section className="py-16 bg-linear-to-r from-amber-50 via-white to-amber-50 overflow-hidden">
-      <div className="container mx-auto px-4 mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-800 mb-2">
+    <section className="py-10 bg-white border-y border-[#cccccc] overflow-hidden">
+      <div className="container mx-auto px-4 mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-[#2c5282] mb-1">
           Featured High-Value Coins
         </h2>
-        <p className="text-center text-slate-600">
+        <p className="text-center text-[#666666] text-sm">
           Explore our most valuable pieces
         </p>
       </div>
 
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-hidden cursor-pointer"
+        className="flex gap-4 overflow-x-hidden cursor-pointer"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -82,43 +82,43 @@ export default function FeaturedCoinsCarousel({ coins }: { coins: Coin[] }) {
           <Link
             href={`/coins/${coin.id}`}
             key={`${coin.id}-${index}`}
-            className="shrink-0 w-72 group"
+            className="shrink-0 w-64 group"
           >
-            <div className="bg-white rounded-xl border-2 border-amber-200 hover:border-amber-400 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 bg-linear-to-br from-slate-100 to-amber-50 p-4 flex items-center justify-center">
+            <div className="bg-white border-2 border-[#cccccc] hover:border-[#d4af37] overflow-hidden">
+              <div className="relative h-40 bg-[#f5f5f5] p-3 flex items-center justify-center">
                 {coin.imageUrl ? (
                   <Image
                     src={coin.imageUrl}
                     alt={coin.name || "Coin"}
-                    width={160}
-                    height={160}
-                    className="object-contain w-40 h-40 group-hover:scale-105 transition-transform duration-300"
+                    width={140}
+                    height={140}
+                    className="object-contain w-36 h-36"
                   />
                 ) : (
-                  <div className="w-32 h-32 rounded-full bg-amber-200 flex items-center justify-center">
-                    <span className="text-amber-700 text-4xl font-bold">$</span>
+                  <div className="w-28 h-28 rounded-full bg-[#d4af37] flex items-center justify-center">
+                    <span className="text-white text-3xl font-bold">$</span>
                   </div>
                 )}
                 {coin.type && (
-                  <span className="absolute top-3 right-3 px-2 py-1 text-xs font-semibold rounded-full bg-amber-600 text-white">
+                  <span className="absolute top-2 right-2 px-2 py-1 text-xs font-semibold bg-[#2c5282] text-white">
                     {formatCoinType(coin.type)}
                   </span>
                 )}
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-slate-800 text-lg truncate group-hover:text-amber-800 transition-colors">
+              <div className="p-3 border-t border-[#cccccc]">
+                <h3 className="font-semibold text-[#333333] text-base truncate">
                   {coin.name}
                 </h3>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-slate-500 text-sm">
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-[#666666] text-xs">
                     {coin.country} {coin.year && `• ${coin.year}`}
                   </span>
                 </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-2xl font-bold text-amber-700">
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-xl font-bold text-[#8b6914]">
                     ${(coin.price / 100).toFixed(2)}
                   </span>
-                  <span className="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full font-medium">
+                  <span className="text-xs text-[#2c5282] bg-[#e8f0f8] px-2 py-1 font-medium">
                     View Details →
                   </span>
                 </div>

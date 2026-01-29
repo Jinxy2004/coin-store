@@ -19,13 +19,13 @@ export default async function coin({
 
   if (!coin) {
     return (
-      <main className="min-h-screen bg-slate-50 pt-6">
+      <main className="min-h-screen bg-white pt-4">
         <div className="container mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-md p-8 text-center">
-            <p className="text-slate-600 text-lg">Coin not found</p>
+          <div className="bg-[#f5f5f5] border border-[#cccccc] p-6 text-center">
+            <p className="text-[#666666]">Coin not found</p>
             <Link
               href="/coins"
-              className="text-amber-700 hover:text-amber-800 font-medium mt-4 inline-block"
+              className="text-[#2c5282] hover:text-[#1e3a5f] font-medium mt-4 inline-block"
             >
               ← Back to coins
             </Link>
@@ -67,21 +67,21 @@ export default async function coin({
       break;
   }
   return (
-    <main className="bg-slate-50 min-h-screen pt-8 pb-12">
+    <main className="bg-white min-h-screen pt-6 pb-8">
       <div className="container mx-auto px-4 max-w-4xl">
         <Link
           href="/coins"
-          className="text-amber-700 hover:text-amber-800 font-medium mb-6 inline-flex items-center gap-1 transition-colors"
+          className="text-[#2c5282] hover:text-[#1e3a5f] font-medium mb-4 inline-flex items-center gap-1"
         >
           ← Back to coins
         </Link>
 
-        <div className="bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        <div className="bg-white border-2 border-[#cccccc] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
             {/* Image Section */}
             {imageUrl && (
-              <div className="flex items-center justify-center bg-slate-50 rounded-lg p-6 border border-slate-200">
-                <div className="relative w-full h-96">
+              <div className="flex items-center justify-center bg-[#f5f5f5] p-4 border border-[#e0e0e0]">
+                <div className="relative w-full h-80">
                   <Image
                     src={imageUrl}
                     alt={name || "Coin image"}
@@ -96,48 +96,48 @@ export default async function coin({
             {/* Details Section */}
             <div className="flex flex-col justify-between">
               <div>
-                <h1 className="text-4xl font-bold text-slate-800 mb-2">
+                <h1 className="text-3xl font-bold text-[#2c5282] mb-2">
                   {name}
                 </h1>
-                <p className="text-slate-600 text-lg mb-6">{description}</p>
+                <p className="text-[#666666] mb-4">{description}</p>
 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-3 mb-6">
                   {year && (
-                    <div className="border-b border-slate-200 pb-4">
-                      <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
+                    <div className="border-b border-[#e0e0e0] pb-3">
+                      <span className="text-xs font-semibold text-[#888888] uppercase tracking-wide">
                         Year
                       </span>
-                      <p className="text-2xl font-semibold text-slate-800 mt-1">
+                      <p className="text-xl font-semibold text-[#333333] mt-1">
                         {year}
                       </p>
                     </div>
                   )}
                   {country && (
-                    <div className="border-b border-slate-200 pb-4">
-                      <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
+                    <div className="border-b border-[#e0e0e0] pb-3">
+                      <span className="text-xs font-semibold text-[#888888] uppercase tracking-wide">
                         Country
                       </span>
-                      <p className="text-2xl font-semibold text-slate-800 mt-1">
+                      <p className="text-xl font-semibold text-[#333333] mt-1">
                         {country}
                       </p>
                     </div>
                   )}
                   {type && (
-                    <div className="border-b border-slate-200 pb-4">
-                      <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
+                    <div className="border-b border-[#e0e0e0] pb-3">
+                      <span className="text-xs font-semibold text-[#888888] uppercase tracking-wide">
                         Type
                       </span>
-                      <p className="text-2xl font-semibold text-slate-800 mt-1">
+                      <p className="text-xl font-semibold text-[#333333] mt-1">
                         {type}
                       </p>
                     </div>
                   )}
                   {denomination && (
-                    <div className="border-b border-slate-200 pb-4">
-                      <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
+                    <div className="border-b border-[#e0e0e0] pb-3">
+                      <span className="text-xs font-semibold text-[#888888] uppercase tracking-wide">
                         Denomination
                       </span>
-                      <p className="text-2xl font-semibold text-slate-800 mt-1">
+                      <p className="text-xl font-semibold text-[#333333] mt-1">
                         {denomination}
                       </p>
                     </div>
@@ -146,24 +146,24 @@ export default async function coin({
               </div>
 
               {/* Price Section */}
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                <span className="text-sm font-semibold text-amber-700 uppercase tracking-wide">
+              <div className="bg-[#faf8f0] border-2 border-[#d4af37] p-4">
+                <span className="text-xs font-semibold text-[#8b6914] uppercase tracking-wide">
                   Price
                 </span>
-                <p className="text-4xl font-bold text-amber-800 mt-2">
+                <p className="text-3xl font-bold text-[#8b6914] mt-1">
                   ${(price / 100).toFixed(2)}
                 </p>
 
                 {/* Stock Status */}
-                <div className="mt-3 mb-2">
+                <div className="mt-2 mb-2">
                   {stock > 0 ? (
                     <span
-                      className={`text-sm font-medium ${stock <= 5 ? "text-amber-600" : "text-green-600"}`}
+                      className={`text-sm font-medium ${stock <= 5 ? "text-[#cc6600]" : "text-[#228b22]"}`}
                     >
                       {stock <= 5 ? `Only ${stock} left!` : `${stock} in stock`}
                     </span>
                   ) : (
-                    <span className="text-sm font-medium text-red-600">
+                    <span className="text-sm font-medium text-[#cc3333]">
                       Out of Stock
                     </span>
                   )}

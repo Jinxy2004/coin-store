@@ -12,13 +12,13 @@ export default async function CartPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-8 pb-12">
+    <main className="min-h-screen bg-white pt-6 pb-8">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-slate-800">Shopping Cart</h1>
+        <div className="flex items-center justify-between mb-6 border-b-2 border-[#d4af37] pb-3">
+          <h1 className="text-2xl font-bold text-[#2c5282]">Shopping Cart</h1>
           <Link
             href="/coins"
-            className="text-amber-700 hover:text-amber-800 font-medium transition-colors"
+            className="text-[#2c5282] hover:text-[#1e3a5f] font-medium"
           >
             ← Continue Shopping
           </Link>

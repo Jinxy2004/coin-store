@@ -22,16 +22,16 @@ export default async function allCoins(props: {
     },
   });
   return (
-    <main className="bg-slate-50 min-h-screen pt-6">
+    <main className="bg-white min-h-screen pt-4">
       <div className="container mx-auto px-4">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-800">Coins</h1>
-          <p className="text-slate-600 mt-2">
+        <div className="mb-6 border-b-2 border-[#d4af37] pb-3">
+          <h1 className="text-3xl font-bold text-[#2c5282]">Coins</h1>
+          <p className="text-[#666666] mt-1 text-sm">
             Browse our collection of rare and collectible coins
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
             <Filters />
