@@ -42,6 +42,7 @@ export default function AddToCartButton({
 
       if (response.ok) {
         setAdded(true);
+        window.dispatchEvent(new Event("cartUpdated"));
         setTimeout(() => setAdded(false), 2000);
       } else {
         setError(data.error || "Failed to add to cart");

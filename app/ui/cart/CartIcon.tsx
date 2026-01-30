@@ -27,9 +27,12 @@ export default function CartIcon({ isAuthenticated }: CartIconProps) {
 
     fetchCartCount();
 
-    // Poll for cart updates every 30 seconds
-    const interval = setInterval(fetchCartCount, 30000);
-    return () => clearInterval(interval);
+    const handleCartUpdate = () => {
+      fetchCartCount();
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate);
   }, [isAuthenticated]);
 
   if (!isAuthenticated) return null;

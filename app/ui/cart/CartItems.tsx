@@ -39,6 +39,7 @@ export default function CartItems() {
       if (response.ok) {
         const data = await response.json();
         setCart(data);
+        window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {
       console.error("Error fetching cart:", error);
@@ -62,6 +63,7 @@ export default function CartItems() {
 
       if (response.ok) {
         await fetchCart();
+        window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {
       console.error("Error updating quantity:", error);
@@ -79,6 +81,7 @@ export default function CartItems() {
 
       if (response.ok) {
         await fetchCart();
+        window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {
       console.error("Error removing item:", error);
