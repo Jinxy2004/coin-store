@@ -2,6 +2,38 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+// GET - Fetch a single coin by ID (for stock check)
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Missing required parameter: id" },
+        { status: 400 },
+      );
+    }
+
+    const coin = await prisma.coins.findUnique({
+      where: { id: Number(id) },
+      select: { id: true, stock: true },
+    });
+
+    if (!coin) {
+      return NextResponse.json({ error: "Coin not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(coin);
+  } catch (error) {
+    console.error("Error fetching coin:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch coin" },
+      { status: 500 },
+    );
+  }
+}
+
 // API endpoint, for inserting the coin form data into the db
 export async function POST(request: NextRequest) {
   // Verifies that the user is authorized to send an API request

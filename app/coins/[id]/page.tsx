@@ -154,21 +154,6 @@ export default async function coin({
                   ${(price / 100).toFixed(2)}
                 </p>
 
-                {/* Stock Status */}
-                <div className="mt-2 mb-2">
-                  {stock > 0 ? (
-                    <span
-                      className={`text-sm font-medium ${stock <= 5 ? "text-[#cc6600]" : "text-[#228b22]"}`}
-                    >
-                      {stock <= 5 ? `Only ${stock} left!` : `${stock} in stock`}
-                    </span>
-                  ) : (
-                    <span className="text-sm font-medium text-[#cc3333]">
-                      Out of Stock
-                    </span>
-                  )}
-                </div>
-
                 <AddToCartButton
                   coinId={id}
                   isAuthenticated={isUserAuthenticated ?? false}
