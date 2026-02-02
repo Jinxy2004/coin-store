@@ -32,6 +32,8 @@ export default function CartItems() {
   const [cart, setCart] = useState<CartData | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<number | null>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
 
   const fetchCart = async () => {
     try {
@@ -87,6 +89,31 @@ export default function CartItems() {
       console.error("Error removing item:", error);
     } finally {
       setUpdating(null);
+    }
+  };
+
+  const proceedToCheckout = async () => {
+    setCheckoutLoading(true);
+    setCheckoutError(null);
+    try {
+      const response = await fetch("/api/checkout/create-session", {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setCheckoutError(data.error || "Failed to start checkout");
+        return;
+      }
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setCheckoutError("Invalid checkout response");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setCheckoutError("Failed to start checkout");
+    } finally {
+      setCheckoutLoading(false);
     }
   };
 
@@ -270,9 +297,16 @@ export default function CartItems() {
             </div>
           </div>
 
-          <Button className="w-full font-semibold py-4 text-base">
-            Proceed to Checkout
+          <Button
+            onClick={proceedToCheckout}
+            disabled={checkoutLoading}
+            className="w-full font-semibold py-4 text-base"
+          >
+            {checkoutLoading ? "Redirecting to checkout…" : "Proceed to Checkout"}
           </Button>
+          {checkoutError && (
+            <p className="text-red-600 text-sm mt-2 text-center">{checkoutError}</p>
+          )}
 
           <Link
             href="/coins"

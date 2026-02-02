@@ -26,13 +26,15 @@ model coins {
   stock        Int        @default(0)
 
   cartItems CartItem[]
+  orderItems OrderItem[]
 }
 
 model User {
-  id       String   @id
+  id        String   @id
   createdAt DateTime @default(now())
 
   cartItems CartItem[]
+  orders    Order[]
 }
 
 model CartItem {
@@ -44,5 +46,38 @@ model CartItem {
   user  User  @relation(fields: [userId], references: [id])
   coin  coins @relation(fields: [coinId], references: [id])
 
-  @@unique([userId, coinId]) 
+  @@unique([userId, coinId])
+}
+
+model Order {
+  id               String      @id @default(cuid())
+  userId           String
+  stripeSessionId  String      @unique
+  totalCents       Int
+  createdAt        DateTime    @default(now())
+
+  // Shipping address (from Stripe Checkout)
+  shippingName       String?
+  shippingLine1      String?
+  shippingLine2      String?
+  shippingCity       String?
+  shippingState      String?
+  shippingPostalCode String?
+  shippingCountry    String?
+
+  user       User        @relation(fields: [userId], references: [id])
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id             Int   @id @default(autoincrement())
+  orderId        String
+  coinId         Int
+  quantity       Int
+  priceCents     Int
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  coin  coins @relation(fields: [coinId], references: [id])
+
+  @@unique([orderId, coinId])
 }
