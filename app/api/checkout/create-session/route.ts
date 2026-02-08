@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 
 async function ensureDbUser() {
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -31,12 +32,11 @@ export async function POST() {
     if (cartItems.length === 0) {
       return NextResponse.json(
         { error: "Your cart is empty" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
       cartItems.map((item) => ({
         price_data: {
@@ -86,7 +86,7 @@ export async function POST() {
     if (!session.url) {
       return NextResponse.json(
         { error: "Failed to create checkout session" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -95,7 +95,7 @@ export async function POST() {
     console.error("Checkout create-session error:", error);
     return NextResponse.json(
       { error: "Failed to create checkout session" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
