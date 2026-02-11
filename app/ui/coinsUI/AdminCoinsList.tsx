@@ -36,7 +36,7 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
         {coins.map((coin) => (
           <li key={coin.id}>
             <Link
-              href={`/coins/${coin.id}`}
+              href={"/admin/coin-modify/modify-form"}
               onMouseOver={() => setActiveId(coin.id)}
               onMouseLeave={() => setActiveId(null)}
               className={clsx(

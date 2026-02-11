@@ -1,10 +1,25 @@
-export default function CoinModify() {
+import AdminCoinsList from "@/app/ui/coinsUI/AdminCoinsList";
+import { prisma } from "@/lib/prisma";
+
+export default async function CoinModify() {
+  const coins = await prisma.coins.findMany({
+    select: {
+      id: true,
+      name: true,
+      year: true,
+      imageUrl: true,
+      price: true,
+      type: true,
+      country: true,
+      stock: true,
+    },
+  });
+
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Modify Coin</h1>
-      <p className="text-gray-600">
-        This page is under construction. Please check back later.
-      </p>
+      <div className="lg:col-span-3">
+        <AdminCoinsList coins={coins} />
+      </div>
     </div>
   );
 }
