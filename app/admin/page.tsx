@@ -13,6 +13,11 @@ export default async function AdminPage() {
             <Link href="/admin/coin-add">Add a coin</Link>
           </Button>
         </div>
+        <div className="bg-[#f5f5f5] border border-[#cccccc] p-4">
+          <Button asChild>
+            <Link href="/admin/coin-modify">Modify a coin</Link>
+          </Button>
+        </div>
       </div>
     </main>
   );
