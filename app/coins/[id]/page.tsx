@@ -1,8 +1,8 @@
 "use server";
 import { prisma } from "@/lib/prisma";
+import { isUserAuthenticated } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import AddToCartButton from "@/app/ui/cart/AddToCartButton";
 
 export default async function coin({
@@ -10,8 +10,7 @@ export default async function coin({
 }: {
   params: Promise<{ id: number }>;
 }) {
-  const { isAuthenticated } = getKindeServerSession();
-  const isUserAuthenticated = await isAuthenticated();
+  const isAuthenticated = await isUserAuthenticated();
 
   const coin = await prisma.coins.findUnique({
     where: { id: Number((await params).id) },
@@ -156,7 +155,7 @@ export default async function coin({
 
                 <AddToCartButton
                   coinId={id}
-                  isAuthenticated={isUserAuthenticated ?? false}
+                  isAuthenticated={isAuthenticated}
                   stock={stock}
                 />
               </div>

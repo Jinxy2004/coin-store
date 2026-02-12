@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { isUserAuthenticated } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 
 async function ensureDbUser() {
-  const { getUser, isAuthenticated } = getKindeServerSession();
-  if (!(await isAuthenticated())) return null;
+  const { getUser } = getKindeServerSession();
+  if (!(await isUserAuthenticated())) return null;
   const kindeUser = await getUser();
   if (!kindeUser) return null;
   const user = await prisma.user.upsert({

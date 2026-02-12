@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { isUserAuthenticated } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
 
@@ -10,8 +11,8 @@ import { stripe } from "@/lib/stripe";
  */
 export async function POST(request: NextRequest) {
   try {
-    const { getUser, isAuthenticated } = getKindeServerSession();
-    if (!(await isAuthenticated())) {
+    const { getUser } = getKindeServerSession();
+    if (!(await isUserAuthenticated())) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
     const kindeUser = await getUser();

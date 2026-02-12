@@ -1,12 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { isUserAuthenticated } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // Helper to ensure user exists in our database
 async function ensureDbUser() {
-  const { getUser, isAuthenticated } = getKindeServerSession();
+  const { getUser } = getKindeServerSession();
 
-  if (!(await isAuthenticated())) {
+  if (!(await isUserAuthenticated())) {
     console.log("Cart API: User not authenticated");
     return null;
   }

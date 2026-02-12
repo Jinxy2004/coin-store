@@ -1,12 +1,11 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { isUserAuthenticated } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function CartCancelPage() {
-  const { isAuthenticated } = getKindeServerSession();
-  const isUserAuthenticated = await isAuthenticated();
+  const isAuthenticated = await isUserAuthenticated();
 
-  if (!isUserAuthenticated) {
+  if (!isAuthenticated) {
     redirect("/api/auth/login?post_login_redirect_url=/cart");
   }
 

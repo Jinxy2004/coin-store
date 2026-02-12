@@ -1,4 +1,5 @@
 import AdminCoinsList from "@/app/ui/coinsUI/AdminCoinsList";
+import SearchBar from "@/app/ui/coinsUI/SearchBar";
 import { prisma } from "@/lib/prisma";
 
 export default async function CoinModify() {
@@ -18,6 +19,7 @@ export default async function CoinModify() {
   return (
     <div>
       <div className="lg:col-span-3">
+        <SearchBar />
         <AdminCoinsList coins={coins} />
       </div>
     </div>

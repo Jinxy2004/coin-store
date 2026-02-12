@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import { isAdminUserWithAuth } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // GET - Fetch a single coin by ID (for stock check)
 export async function GET(request: NextRequest) {
@@ -36,12 +36,7 @@ export async function GET(request: NextRequest) {
 
 // API endpoint, for inserting the coin form data into the db
 export async function POST(request: NextRequest) {
-  // Verifies that the user is authorized to send an API request
-  const { isAuthenticated, getRoles } = getKindeServerSession();
-  const roles = await getRoles();
-
-  const hasAdminRole = roles?.some((role) => role.key === "site-manager");
-  if (!isAuthenticated || !hasAdminRole) {
+  if (!(await isAdminUserWithAuth())) {
     return NextResponse.json({ error: "Not Authorized" }, { status: 401 });
   }
   try {
