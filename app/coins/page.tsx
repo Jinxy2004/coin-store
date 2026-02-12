@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import CoinsList from "@/app/ui/coinsUI/CoinsList";
 import Filters from "@/app/ui/coinsUI/Filters";
+import { isAdminUserWithAuth } from "@/lib/auth";
 
 export default async function allCoins(props: {
   searchParams?: Promise<{
@@ -10,6 +11,7 @@ export default async function allCoins(props: {
     country?: string;
   }>;
 }) {
+  const isAdmin = await isAdminUserWithAuth();
   const searchParams = await props.searchParams;
   const coins = await prisma.coins.findMany({
     where: {
@@ -39,7 +41,7 @@ export default async function allCoins(props: {
 
           {/* Coins Grid */}
           <div className="lg:col-span-3">
-            <CoinsList coins={coins} />
+            <CoinsList coins={coins} isAdmin={isAdmin} />
           </div>
         </div>
       </div>

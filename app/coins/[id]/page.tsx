@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
-import { isUserAuthenticated } from "@/lib/auth";
+import { isUserAuthenticated, isAdminUserWithAuth } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCartButton from "@/app/ui/cart/AddToCartButton";

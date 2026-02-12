@@ -14,7 +14,13 @@ type Coin = {
   stock: number;
 };
 
-export default function CoinsList({ coins }: { coins: Coin[] }) {
+export default function CoinsList({
+  coins,
+  isAdmin,
+}: {
+  coins: Coin[];
+  isAdmin: boolean;
+}) {
   const [activeId, setActiveId] = useState<number | null>(null);
 
   if (coins.length === 0) {
@@ -34,19 +40,19 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
       </div>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {coins.map((coin) => (
-          <li key={coin.id}>
-            <Link
-              href={`/coins/${coin.id}`}
-              onMouseOver={() => setActiveId(coin.id)}
-              onMouseLeave={() => setActiveId(null)}
-              className={clsx(
-                "block p-4 h-full",
-                "border border-[#cccccc] hover:border-[#d4af37]",
-                activeId === coin.id
-                  ? "bg-[#faf8f0] border-[#d4af37]"
-                  : "bg-white hover:bg-[#f9f9f9]",
-              )}
-            >
+          <li
+            key={coin.id}
+            onMouseOver={() => setActiveId(coin.id)}
+            onMouseLeave={() => setActiveId(null)}
+            className={clsx(
+              "relative p-4 h-full",
+              "border border-[#cccccc] hover:border-[#d4af37]",
+              activeId === coin.id
+                ? "bg-[#faf8f0] border-[#d4af37]"
+                : "bg-white hover:bg-[#f9f9f9]",
+            )}
+          >
+            <Link href={`/coins/${coin.id}`} className="block h-full">
               {coin.imageUrl && (
                 <div className="mb-3 overflow-hidden bg-[#f5f5f5] p-3 h-48 flex items-center justify-center border border-[#e0e0e0]">
                   <Image
@@ -69,8 +75,17 @@ export default function CoinsList({ coins }: { coins: Coin[] }) {
                     ${(coin.price / 100).toFixed(2)}
                   </p>
                 )}
+                {isAdmin && <div> Stock: {coin.stock}</div>}
               </div>
             </Link>
+            {isAdmin && (
+              <Link
+                href="#"
+                className="absolute bottom-3 right-3 z-10 text-xs px-2 py-1 border border-[#cccccc] bg-white hover:border-[#d4af37]"
+              >
+                Admin
+              </Link>
+            )}
           </li>
         ))}
       </ul>
