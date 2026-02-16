@@ -1,12 +1,12 @@
-import Link from "next/link";
 import { LogoutLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Button } from "@/components/ui/button";
-import { isUserAuthenticated } from "@/lib/auth";
+import { isAdminUserWithAuth, isUserAuthenticated } from "@/lib/auth";
 import NavButton from "@/components/ui/NavButton";
 import CartIcon from "@/app/ui/cart/CartIcon";
 
 const Navbar = async () => {
   const isAuthenticated = await isUserAuthenticated();
+  const isAdmin = await isAdminUserWithAuth();
 
   return (
     <>
@@ -26,6 +26,13 @@ const Navbar = async () => {
               <li>
                 <NavButton href="/coins?type=gold">Gold</NavButton>
               </li>
+              {isAdmin ? (
+                <li>
+                  <NavButton href="/admin">Admin</NavButton>
+                </li>
+              ) : (
+                <div></div>
+              )}
             </ul>
 
             {isAuthenticated ? (
