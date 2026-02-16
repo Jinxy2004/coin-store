@@ -80,10 +80,10 @@ export default function CoinsList({
             </Link>
             {isAdmin && (
               <Link
-                href="#"
-                className="absolute bottom-3 right-3 z-10 text-xs px-2 py-1 border border-[#cccccc] bg-white hover:border-[#d4af37]"
+                href={`/admin/coin-modify/modify-form?id=${coin.id}`}
+                className="absolute bottom-3 right-3 z-10 text-xs px-2 py-1 border border-[#cccccc] bg-white hover:border-[#d4af37] hover:bg-[#faf8f0] text-[#2c5282] font-medium"
               >
-                Admin
+                Modify
               </Link>
             )}
           </li>

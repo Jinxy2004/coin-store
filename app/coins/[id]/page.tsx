@@ -11,6 +11,7 @@ export default async function coin({
   params: Promise<{ id: number }>;
 }) {
   const isAuthenticated = await isUserAuthenticated();
+  const isAdmin = await isAdminUserWithAuth();
 
   const coin = await prisma.coins.findUnique({
     where: { id: Number((await params).id) },
@@ -158,6 +159,15 @@ export default async function coin({
                   isAuthenticated={isAuthenticated}
                   stock={stock}
                 />
+
+                {isAdmin && (
+                  <Link
+                    href={`/admin/coin-modify/modify-form?id=${id}`}
+                    className="mt-3 block w-full text-center px-4 py-2 border-2 border-[#2c5282] text-[#2c5282] font-semibold hover:bg-[#2c5282] hover:text-white transition-colors"
+                  >
+                    Modify Coin
+                  </Link>
+                )}
               </div>
             </div>
           </div>

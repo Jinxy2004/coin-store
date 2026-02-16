@@ -15,7 +15,7 @@ export default async function AdminPage() {
         </div>
         <div className="bg-[#f5f5f5] border border-[#cccccc] p-4">
           <Button asChild>
-            <Link href="/admin/coin-modify">Modify a coin</Link>
+            <Link href="/coins">Modify a coin</Link>
           </Button>
         </div>
       </div>

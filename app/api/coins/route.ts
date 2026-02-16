@@ -17,7 +17,6 @@ export async function GET(request: NextRequest) {
 
     const coin = await prisma.coins.findUnique({
       where: { id: Number(id) },
-      select: { id: true, stock: true },
     });
 
     if (!coin) {
