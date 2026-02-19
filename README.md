@@ -1,46 +1,9 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Grandpa's Coin Store
 
-## Getting Started
+My Grandfather has been an avid coin collector for a large part of his life. At this point his hobby has turned into business, but its hard work to sell coins. He has to go to coin shows every weekend to sell them, and that isn't easy. But he needs this money to stay afloat, so I thought I'd take this opportunity to help him sell his coins, and also gain new experience.
 
-First, run the development server:
+https://coin-store-nine.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Stripe payments
-
-Checkout uses Stripe’s hosted Checkout page. Set these in `.env` or `.env.local`:
-
-- **STRIPE_SECRET_KEY** – From [Stripe Dashboard → API keys](https://dashboard.stripe.com/apikeys) (use test keys for development).
-- **STRIPE_WEBHOOK_SECRET** – From [Stripe Dashboard → Webhooks](https://dashboard.stripe.com/webhooks). Add endpoint `https://your-domain.com/api/webhooks/stripe` and listen for `checkout.session.completed`. For local testing use [Stripe CLI](https://stripe.com/docs/stripe-cli): `stripe listen --forward-to localhost:3000/api/webhooks/stripe`.
-- **NEXT_PUBLIC_APP_URL** – Your app URL (e.g. `http://localhost:3000` for dev, `https://yoursite.com` for prod). Used for success/cancel redirects.
-
-After payment, the webhook creates an order, decrements coin stock, and clears the cart.
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For this project I decided to go with **next.js**, and use vercel to deploy the project. The project is being written in **typescript** instead of **javascript**. This is because I prefer typed languages as compared to untyped languages. For user auth I went with kinde-auth. Kinde-auth keeps track of user login information, it also tracks SSO session managment, and tokenz for authorization. I store the data for the coins on supabase, using the buckets for the coin images. For interacting with the database I went with prisma ORM.
