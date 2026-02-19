@@ -12,8 +12,8 @@ const Navbar = async () => {
     <>
       <div className="w-full h-16 bg-white sticky top-0 z-50 border-b-2 border-[#cccccc]">
         <div className="container mx-auto px-4 h-full">
-          <div className="flex items-center justify-between h-full">
-            <ul className="flex gap-x-6 text-[#333333] font-medium whitespace-nowrap mx-auto">
+          <div className="relative flex items-center h-full">
+            <ul className="absolute left-1/2 -translate-x-1/2 flex gap-x-6 text-[#333333] font-medium whitespace-nowrap">
               <li>
                 <NavButton href="/">Home Page</NavButton>
               </li>
@@ -36,14 +36,14 @@ const Navbar = async () => {
             </ul>
 
             {isAuthenticated ? (
-              <div className="flex items-center gap-4 shrink-0">
+              <div className="ml-auto flex items-center gap-4 shrink-0">
                 <CartIcon isAuthenticated={isAuthenticated} />
                 <Button asChild variant="destructive" className="font-semibold">
                   <LogoutLink>Logout</LogoutLink>
                 </Button>
               </div>
             ) : (
-              <Button asChild className="shrink-0 font-semibold">
+              <Button asChild className="ml-auto shrink-0 font-semibold">
                 <LoginLink>Sign in / Sign up</LoginLink>
               </Button>
             )}
